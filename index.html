@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="euc-jp">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Srcset Sample</title>
+<style>
+img{
+    width: 100%;
+    height: auto;
+    max-width: 423px;
+    max-height: 477px;
+}
+</style>
+</head>
+<body>
+
+<div style="width: 50%;">
+    <img src="./img/img_default.png?v=<!--#config timefmt='%H%M%S' --><!--#echo var='DATE_LOCAL' -->"
+         sizes="100vw"
+         srcset="./img/img_x1.png?v=<!--#config timefmt='%H%M%S' --><!--#echo var='DATE_LOCAL' --> 1x,
+                 ./img/img_x2.png?v=<!--#config timefmt='%H%M%S' --><!--#echo var='DATE_LOCAL' --> 2x">
+</div>
+
+<script>
+    function outputImgSrc(){
+        var img = document.getElementsByTagName('img');
+        console.log(img[0].currentSrc)
+    }
+    window.addEventListener('resize', outputImgSrc, false);
+    window.addEventListener('load', outputImgSrc, false);
+</script>
+
+<!-- 
+srcsetはあくまで無駄なデータ通信量を避けるためのもので、一旦大きい画像が読み込まれたら(キャッシュされたら)ウィンドウサイズを小さくしても、小さい画像は無理に読み込まない。
+-->
+</body>
+</html>
